@@ -4,7 +4,7 @@
  */
 
 // Debug settings
-const DEBUG_CROSSHAIR = false; // Set to true to show debug crosshair
+const DEBUG_CROSSHAIR = true; // Set to true to show debug crosshair
 
 // Single Responsibility: Handles configuration
 class TOCConfig {
@@ -79,8 +79,11 @@ class ScrollManager {
     scrollToHeading(id, offset) {
         const heading = document.getElementById(id);
         if (heading) {
-            const top = heading.offsetTop - offset;
-            window.scrollTo({ top, behavior: 'smooth' });
+            // Calculate the center of the heading, similar to how active state tracking works
+            const headingCenter = HeadingAnalyzer.getHeadingCenter(heading);
+            const viewportHeight = window.innerHeight;
+            const targetScrollTop = headingCenter - (viewportHeight / 2);
+            window.scrollTo({ top: targetScrollTop, behavior: 'smooth' });
         }
     }
 }

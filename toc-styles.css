@@ -141,14 +141,6 @@
 }
 
 /* ========================================
-   S - Single Responsibility: Accessibility
-   ======================================== */
-.toc-link:focus {
-    outline: 2px solid var(--toc-primary);
-    outline-offset: 2px;
-}
-
-/* ========================================
    S - Single Responsibility: Print Styles
    ======================================== */
 @media print {
