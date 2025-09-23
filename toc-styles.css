@@ -1,0 +1,173 @@
+/**
+ * Table of Contents (TOC) Styles
+ * SOLID principles implementation
+ */
+
+/* ========================================
+   S - Single Responsibility: Design Tokens
+   ======================================== */
+:root {
+    /* Color System */
+    --toc-primary: #dafea4;
+    --toc-text: #000;
+    --toc-border: #eee;
+
+    /* Spacing System */
+    --toc-padding-small: 0.5rem;
+    --toc-padding-medium: 0.75rem;
+    --toc-margin-small: 0.125rem;
+
+    /* Typography */
+    --toc-font-weight-normal: 400;
+    --toc-font-weight-semibold: 600;
+
+    /* Transitions */
+    --toc-transition: all 0.2s ease;
+
+    /* Layout */
+    --toc-indent-base: 1.25rem;
+}
+
+/* ========================================
+   S - Single Responsibility: Base Styles
+   ======================================== */
+.toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc-item {
+    margin: 0;
+    padding: 0;
+}
+
+.toc-link {
+    display: block;
+    text-decoration: none;
+    color: var(--toc-text);
+    padding: var(--toc-padding-small) var(--toc-padding-medium);
+    margin: var(--toc-margin-small) 0;
+    transition: var(--toc-transition);
+}
+
+/* ========================================
+   S - Single Responsibility: State Management
+   ======================================== */
+.toc-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.toc-link.toc-active {
+    background-color: var(--toc-primary);
+    font-weight: var(--toc-font-weight-semibold);
+}
+
+.toc-link.toc-current {
+    background-color: var(--toc-primary);
+    color: var(--toc-text);
+    font-weight: var(--toc-font-weight-semibold);
+}
+
+/* ========================================
+   S - Single Responsibility: Layout System
+   ======================================== */
+.toc-level-1 {
+    margin-left: 0;
+}
+
+.toc-level-2 {
+    margin-left: var(--toc-indent-base);
+}
+
+.toc-level-3 {
+    margin-left: calc(var(--toc-indent-base) * 2);
+}
+
+.toc-level-4 {
+    margin-left: calc(var(--toc-indent-base) * 3);
+}
+
+.toc-level-5 {
+    margin-left: calc(var(--toc-indent-base) * 4);
+}
+
+.toc-level-6 {
+    margin-left: calc(var(--toc-indent-base) * 5);
+}
+
+.toc-level-7 {
+    margin-left: calc(var(--toc-indent-base) * 6);
+}
+
+.toc-level-8 {
+    margin-left: calc(var(--toc-indent-base) * 7);
+}
+
+/* ========================================
+   S - Single Responsibility: Separators
+   ======================================== */
+.toc-level-1:not(:last-child),
+.toc-level-2:not(:last-child),
+.toc-level-3:not(:last-child),
+.toc-level-4:not(:last-child),
+.toc-level-5:not(:last-child),
+.toc-level-6:not(:last-child),
+.toc-level-7:not(:last-child),
+.toc-level-8:not(:last-child) {
+    border-bottom: 1px solid var(--toc-border);
+}
+
+/* ========================================
+   S - Single Responsibility: Container Layout
+   ======================================== */
+[data-toc-container] {
+    position: sticky;
+    top: 0;
+    height: 100%;
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+/* ========================================
+   S - Single Responsibility: Responsive Design
+   ======================================== */
+@media (max-width: 768px) {
+    [data-toc-container] {
+        position: static;
+        max-height: none;
+        margin: 1rem 0;
+    }
+}
+
+/* ========================================
+   S - Single Responsibility: Accessibility
+   ======================================== */
+.toc-link:focus {
+    outline: 2px solid var(--toc-primary);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   S - Single Responsibility: Print Styles
+   ======================================== */
+@media print {
+    [data-toc-container] {
+        position: static;
+        max-height: none;
+        background: none;
+        border: none;
+    }
+
+    .toc-link {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    .toc-link.toc-active,
+    .toc-link.toc-current {
+        background: none;
+        color: #000;
+        font-weight: var(--toc-font-weight-semibold);
+    }
+}
