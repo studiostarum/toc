@@ -109,15 +109,19 @@ class ActiveStateManager {
         
         headings.forEach(heading => {
             const headingCenter = HeadingAnalyzer.getHeadingCenter(heading);
-            const distance = Math.abs(headingCenter - viewportCenter);
             
-            if (DEBUG_CROSSHAIR) {
-                console.log(`Heading: ${heading.textContent}, Center: ${headingCenter}, Distance: ${distance.toFixed(2)}`);
-            }
-            
-            if (distance < closestDistance) {
-                closestDistance = distance;
-                activeHeading = heading;
+            // Only consider headings that are above or at the viewport center
+            if (headingCenter <= viewportCenter) {
+                const distance = viewportCenter - headingCenter;
+                
+                if (DEBUG_CROSSHAIR) {
+                    console.log(`Heading: ${heading.textContent}, Center: ${headingCenter}, Distance: ${distance.toFixed(2)}`);
+                }
+                
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    activeHeading = heading;
+                }
             }
         });
         
@@ -182,6 +186,13 @@ class TOCGenerator {
         const level = HeadingAnalyzer.getHeadingLevel(heading) - topLevel + 1;
         item.className = `toc-item toc-level-${level}`;
         
+        // Add line div for levels 2 and above
+        if (level >= 2) {
+            const lineDiv = document.createElement('div');
+            lineDiv.className = `toc-line toc-line-level-${level}`;
+            item.appendChild(lineDiv);
+        }
+        
         const link = this.createTOCLink(id, heading.textContent);
         item.appendChild(link);
         
@@ -207,39 +218,18 @@ class DebugCrosshair {
         this.createHorizontalLine();
         this.createVerticalLine();
         this.setupToggle();
-        console.log('TOC Debug Crosshair created. Press Ctrl+D to toggle.');
     }
     
     static createHorizontalLine() {
         const crosshair = document.createElement('div');
         crosshair.id = 'toc-debug-crosshair';
-        crosshair.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: red;
-            z-index: 9999;
-            pointer-events: none;
-            opacity: 0.7;
-        `;
+        crosshair.className = 'toc-debug-crosshair';
         document.body.appendChild(crosshair);
     }
     
     static createVerticalLine() {
         const verticalLine = document.createElement('div');
-        verticalLine.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 50%;
-            width: 2px;
-            height: 100vh;
-            background: red;
-            z-index: 9999;
-            pointer-events: none;
-            opacity: 0.7;
-        `;
+        verticalLine.className = 'toc-debug-crosshair-vertical';
         document.body.appendChild(verticalLine);
     }
     
@@ -250,10 +240,27 @@ class DebugCrosshair {
                 e.preventDefault();
                 visible = !visible;
                 const crosshair = document.getElementById('toc-debug-crosshair');
-                const verticalLine = document.querySelector('div[style*="left: 50%"]');
-                if (crosshair) crosshair.style.display = visible ? 'block' : 'none';
-                if (verticalLine) verticalLine.style.display = visible ? 'block' : 'none';
-                console.log('TOC Debug Crosshair:', visible ? 'ON' : 'OFF');
+                const verticalLine = document.querySelector('.toc-debug-crosshair-vertical');
+                
+                if (crosshair) {
+                    // Remove any inline styles that might interfere
+                    crosshair.removeAttribute('style');
+                    if (visible) {
+                        crosshair.classList.remove('toc-debug-crosshair-hidden');
+                    } else {
+                        crosshair.classList.add('toc-debug-crosshair-hidden');
+                    }
+                }
+                
+                if (verticalLine) {
+                    // Remove any inline styles that might interfere
+                    verticalLine.removeAttribute('style');
+                    if (visible) {
+                        verticalLine.classList.remove('toc-debug-crosshair-hidden');
+                    } else {
+                        verticalLine.classList.add('toc-debug-crosshair-hidden');
+                    }
+                }
             }
         });
     }
