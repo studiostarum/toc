@@ -287,6 +287,9 @@ class TableOfContents {
         
         this.setupEventListeners();
         DebugCrosshair.create();
+        
+        // Set initial active state on page load
+        this.updateActiveState();
     }
     
     setupEventListeners() {
