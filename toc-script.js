@@ -4,7 +4,7 @@
  */
 
 // Debug settings
-const DEBUG_CROSSHAIR = true; // Set to true to show debug crosshair
+const DEBUG_CROSSHAIR = false; // Set to true to show debug crosshair
 
 // Single Responsibility: Handles configuration
 class TOCConfig {
