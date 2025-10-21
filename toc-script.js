@@ -1,5 +1,6 @@
 /**
  * Table of Contents (TOC) Script
+ * Version: 1.0.0
  * SOLID principles implementation
  */
 

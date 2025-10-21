@@ -1,5 +1,7 @@
 # Custom Table of Contents (TOC) Script
 
+**Version: 1.0.0**
+
 A reliable, reusable Table of Contents solution for Webflow websites that's more dependable than third-party solutions.
 
 ## Features

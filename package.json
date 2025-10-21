@@ -1,0 +1,33 @@
+{
+  "name": "toc-script",
+  "version": "1.0.0",
+  "description": "A simple and reliable Table of Contents script with SOLID principles",
+  "main": "toc-script.js",
+  "files": [
+    "toc-script.js",
+    "toc-styles.css",
+    "README-TOC.md"
+  ],
+  "keywords": [
+    "table-of-contents",
+    "toc",
+    "navigation",
+    "javascript",
+    "webflow",
+    "solid-principles"
+  ],
+  "author": "Studio Starum",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/studiostarum/toc.git"
+  },
+  "homepage": "https://github.com/studiostarum/toc#readme",
+  "bugs": {
+    "url": "https://github.com/studiostarum/toc/issues"
+  },
+  "scripts": {
+    "version": "echo 'Version $npm_package_version'",
+    "postversion": "git push && git push --tags"
+  }
+}
