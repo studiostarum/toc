@@ -6,7 +6,7 @@ A reliable, reusable Table of Contents solution for Webflow websites that's more
 
 ## Features
 
-- ✅ **Automatic heading detection** - Scans content for H2-H6 headings
+- ✅ **Automatic heading detection** - Scans content for H2 headings only
 - ✅ **Smooth scrolling** - Configurable smooth scroll behavior
 - ✅ **Active state management** - Highlights current section using Intersection Observer
 - ✅ **URL hash support** - Updates browser URL with current section
@@ -86,7 +86,7 @@ const toc = new TableOfContents({
     tocContainerSelector: '[data-toc-container]',
     
     // Heading levels to include
-    headingLevels: ['h2', 'h3', 'h4', 'h5', 'h6'],
+    headingLevels: ['h2'],
     
     // Scroll behavior
     scrollOffset: 100, // pixels from top
@@ -203,7 +203,7 @@ The TOC uses semantic CSS classes that you can easily customize:
 |--------|------|---------|-------------|
 | `contentSelector` | string | `'[data-toc-content]'` | Selector for content area |
 | `tocContainerSelector` | string | `'[data-toc-container]'` | Selector for TOC container |
-| `headingLevels` | array | `['h2','h3','h4','h5','h6']` | Heading levels to include |
+| `headingLevels` | array | `['h2']` | Heading levels to include |
 | `scrollOffset` | number | `80` | Scroll offset in pixels |
 | `smoothScroll` | boolean | `true` | Enable smooth scrolling |
 | `activeClass` | string | `'toc-active'` | CSS class for active link |
